@@ -1,17 +1,42 @@
 package com.example.dex.clienttest;
 
+import android.app.Activity;
+import android.content.Intent;
 import android.support.v7.app.ActionBarActivity;
 import android.os.Bundle;
 import android.view.Menu;
 import android.view.MenuItem;
+import android.view.View;
+import android.widget.EditText;
 
 
-public class UploadFileActivity extends ActionBarActivity {
+public class UploadFileActivity extends Activity {
+
+    private static final int REQUEST_PATH = 1;
+    String curFileName;
+    EditText edittext;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_upload_file);
+        edittext = (EditText)findViewById(R.id.editText);
+    }
+
+    public void getfile(View view){
+        Intent intent1 = new Intent(this, FileChooseActivity.class);
+        startActivityForResult(intent1,REQUEST_PATH);
+    }
+
+    // Listen for results.
+    protected void onActivityResult(int requestCode, int resultCode, Intent data){
+        // See which child activity is calling us back.
+        if (requestCode == REQUEST_PATH){
+            if (resultCode == RESULT_OK) {
+                curFileName = data.getStringExtra("GetFileName");
+                edittext.setText(curFileName);
+            }
+        }
     }
 
     @Override

@@ -20,6 +20,10 @@
             android:name=".UploadFileActivity"
             android:label="@string/title_activity_upload_file" >
         </activity>
+        <activity
+            android:name=".FileChooseActivity"
+            android:label="@string/title_activity_file_choose" >
+        </activity>
     </application>
 
 </manifest>
